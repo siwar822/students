@@ -4,43 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>Edit </title>
+
 </head>
 <body>
-    <?php
-    include 'dbconnexion.php';
-    $data =$rep->fetch();
-    ?>
-    <div>
-        <fieldset class="container">
-            <h2>Editer etudient</h2>
-            <form action="update.php" method="post">
-            
-            <div class="form-group">
-            <label for="id">id</label>
-            <input type="text"  class="form-control" name="id" value="<?php echo $data['id'] ?>"> <!-- id  -->
-            </div>
-            <div class="form-group">
-            <label for="firstname">first name</label>
-            <input type="text"  class="form-control" name="firstname" value="<?php echo $data['firstname'] ?>">
-            </div>
-            <div class="form-group">
-            <label for="lasttname">last name</label>
-            <input type="text"  class="form-control" name="lastname" value="<?php echo $data['lastname'] ?>">
-            </div>
-            <div class="form-group">
+    <div class="container">
+<fieldset>
+<h2>Editer etudient</h2>
+<?php
+    include 'dbconnection.php';
+    $id = $_GET['id'];
+    $rep = $connection->query("SELECT * FROM students WHERE Id='$id'");
+    $data = $rep->fetch();
+?>
+    <form action="update.php?id=<?= $id ?>" method="post">
+
+        <div class="form-group">
+            <!-- <label for="id">id</label> -->
+            <input type="hidden"  class="form-control" name="id" value="<?=$data['Id']?> ?>"> <!-- id  -->
+        </div>
+        <div class="form-group">
+            <label for="firstname">First name</label>
+            <input class="form-control" type="text" placeholder="Firstname" name="firstname" value="<?= $data['firstname'] ?>">
+        </div>
+        <div class="form-group">
+            <label for="lastname">Last name</label>
+            <input class="form-control" type="text" placeholder="Lastname" name="lastname" value="<?= $data['lastname'] ?>">
+        </div>
+        <div class="form-group">
             <label for="email">Email</label>
-            <input type="text"  class="form-control" name="email" value="<?php echo $data['email'] ?>">
-            </div>
-            <div class="form-group">
-            <label for="phone">Phone</label>
-            <input type="text"  class="form-control" name="phone" value="<?php echo $data['Phone'] ?>">
-            </div>
-            <button class="btn btn-success">valider</button>
-            <button class="btn btn-success"  type="reset"  >annuler</button>
-        </form>
-        </fieldset>
+            <input class="form-control" type="text" placeholder="Email" name="email" value="<?= $data['email'] ?>">
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input class="form-control" type="text" placeholder="Phone" name="phone" value="<?= $data['phone'] ?>">
+        </div>
+        <button type="submit" class="btn btn-info">Editer</button>
+        <a href="index.php"><button type="text" class="btn btn-dark">Anuler</button></a>
+    </form>
+</fieldset>
     </div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+
+
+
